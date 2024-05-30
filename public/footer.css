@@ -1,0 +1,19 @@
+.public-footer {
+    padding: 40px 0;
+}
+
+.public-footer ul li {
+    margin: 0 15px;
+}
+
+.public-footer ul li:first-child {
+    margin-left: 0;
+}
+
+.public-footer .li-mr {
+    margin-right: 20px;
+}
+
+.fab{
+    padding:1.5%;
+}

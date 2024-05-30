@@ -1,0 +1,113 @@
+/* courses.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("images/st1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.heading {
+  text-align: center;
+  font-family: fantasy;
+  margin-bottom: 20px;
+  color: #0d431c;
+  margin-top: 5%;
+}
+
+.course-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.no-courses{
+  margin-top: 20%;
+  margin-bottom: 20%;
+  margin-left: 30%;
+  margin-right: 30%;
+  text-align: center;
+  font-family:fantasy;
+  background-color: #0d431c;
+  color: rgb(16, 227, 55);
+}
+
+.course-item {
+  width: calc(30% - 20px);
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #8f8e8e;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.course-item:hover {
+  transform: translateY(-5px);
+}
+
+.course-item .course-details {
+  padding: 20px;
+}
+
+.course-item .course-details h2,
+.course-item .course-details p {
+  color: #fff;
+}
+
+.enroll-form {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.il-icon {
+  display: inline-block;
+}
+
+.enroll-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0d431c;
+  color: rgb(16, 227, 55);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button {
+  padding: 10px 20px;
+  margin-left: 70%;
+  font-size: 16px;
+  background-color: #0d431c;
+  color: rgb(16, 227, 55);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; 
+}
+
+
+.enroll-button:hover {
+  background-color: green;
+}
+
+
+.close {
+  float: right;
+  cursor: pointer;
+}
+

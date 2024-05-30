@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <title>User Profile</title>
+
+    <%- include("partials/header.ejs") %>
+
+
+<body class="profile-body">
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="/images/s2.jpg" alt="Background Image" class="header-image">
+        </div>
+        <div class="profile-content">
+            <div class="profile-picture">
+                <img src="/Profiles_Pic/<%= userProfile.profilepic %>" alt="Profile Picture">
+                <label for="fileInput" class="camera-icon">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <form id="uploadForm" action="/users/upload-profile-pic" method="POST" enctype="multipart/form-data" style="display: none;">
+                    <input type="file" id="fileInput" name="newProfilePic" onchange="document.getElementById('uploadForm').submit()">
+                </form>
+            </div>
+            <h1 class="profile-name"><%= userProfile.username %></h1>
+            <a style="font-size: 13px; color: rgb(16, 227, 55); margin-right: 10px; margin-left: 10px;" href="#" data-toggle="modal" data-target="#usernameModal">Change Username</a>
+
+            <div class="profile-field">
+                <label class="profile-label">Email:</label>
+                <input type="email" id="email" name="email" value="<%= userProfile.email %>" class="profile-input" readonly>
+                <a id="changeEmailLink" style="font-size: 13px; color: rgb(16, 227, 55); margin-right: 10px" href="#" data-toggle="modal" data-target="#emailModal">Change Email</a>
+            </div>
+
+            <div class="profile-field">
+                <label class="profile-label">Password:</label>
+                <input type="password" id="password" name="password" value="<%= userProfile.password %>" class="profile-input" readonly>
+                <a id="changePasswordLink" style="font-size: 13px; color: rgb(16, 227, 55); margin-right: 10px" href="#" data-toggle="modal" data-target="#passwordModal">Change Password</a>
+            </div>
+
+            <p class="profile-bio">A passionate developer with expertise in web development and a love for creating amazing user experiences.</p>
+            <div class="profile-social">
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class=" fab fa-instagram "></i> </i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for changing username -->
+    <div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="usernameModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="usernameModalLabel">Change Username</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateUsernameForm" method="POST" action="/users/username">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="form-group">
+                            <label class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="usernamechange" name="newUsername" required>
+                        </div>
+                        <button style="margin-left: 60%;" type="submit" class="enroll-button">Update Username</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal for changing email -->
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emailModalLabel">Change Email</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updateEmailForm" method="POST" action="/users/email">
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="form-group">
+                        <label class="col-form-label">Email:</label>
+                        <input type="email" name="newEmail" class="form-control" id="recipient-name" required>
+                    </div>
+                    <button style="margin-left: 65%;" type="submit" class="enroll-button">Update Email</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for changing password -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passwordModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <% if (typeof message !== 'undefined') { %>
+                    <div class="alert alert-info" role="alert">
+                        <%= message %>
+                    </div>
+                <% } %>
+                <form id="updatePasswordForm" method="POST" action="/users/password">
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="form-group">
+                        <label class="col-form-label">New Password:</label>
+                        <input type="password" name="newPassword" class="form-control" id="new-password" required minlength="8">
+                    </div>
+                    <button style="margin-left: 60%;" type="submit" class="enroll-button">Update Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
+</body>
+</html>

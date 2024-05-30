@@ -1,0 +1,74 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/contact.css">
+  <title>Contact</title>
+  <style>
+    #customAlertMessage {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 80%;
+        max-width: 600px;
+    }
+</style>
+  <%- include("partials/header.ejs") %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<body>
+  <div id="customAlertMessage" class="alert" role="alert">
+    <!-- Alert message will be injected here -->
+</div>
+  <div class="contact-page mt-4" style="overflow-y: auto; height: calc(100vh - 60px); padding-top: 60px;">
+    <section class="contact-form">
+      <h2>THANK YOU FOR BEING HERE💚!</h2>
+      <form id="add-message-form" action="/contacts/sendMessage" method="post" class="enroll-form">
+        <input type="text" name="username" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+        <div id="message-box" style="display: none; background-color: #5ad122; color: #721c25; border: 1px solid #f5c6cb;
+      padding: 10px; border-radius: 5px; margin-top: 10px;"></div>
+      </form>
+    </section>
+  </div>
+  
+  
+  <script>
+    $(document).ready(function () {
+        $('.enroll-form').submit(function (event) {
+            event.preventDefault();
+            const form = $(this);
+            const actionUrl = form.attr('action');
+            const formData = form.serialize();
+
+            $.post(actionUrl, formData, function (response) {
+                $('#customAlertMessage').removeClass('alert-danger').addClass('alert-success').text(response).show();
+                setTimeout(function () {
+                    $('#customAlertMessage').hide();
+                    location.reload();
+                }, 4000); // Reload the page after 2 seconds
+            }).fail(function (xhr) {
+                $('#customAlertMessage').removeClass('alert-success').addClass('alert-danger').text(xhr.responseText).show();
+                setTimeout(function () {
+                    $('#customAlertMessage').hide();
+                
+                }, 4000); // Reload the page after 2 seconds
+            });
+        });
+    });
+</script>
+  <%- include("partials/footer.ejs") %>
+</body>
+
+</html>

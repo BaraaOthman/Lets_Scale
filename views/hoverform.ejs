@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add course</title>
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/hoverform.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+    <%- include("partials/header.ejs") %>
+
+<body class="body-form">
+    <div class="container-add">
+        <h2 style="color: #fff;">Add Course</h2>
+        
+        <form id="add-course-form" action="/courses/addCourse" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" id="title" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <input type="text" id="description" name="description">
+            </div>
+            <div class="form-group">
+                <label>Image_Background:</label>
+                <input type="file" id="url" name="image" required>
+            </div> 
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        <div id="message-box" style="display: none;background-color: #7ce0a8; color: #ffffff; border: 1px solid #f5c6cb;
+        padding: 10px; border-radius: 5px; margin-top: 10px;"></div>
+    </div>
+
+    <script>
+        document.getElementById('add-course-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            try {
+                const response = await fetch('/courses/addCourse', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Show success message in message box
+                    const messageBox = document.getElementById('message-box');
+                    messageBox.textContent = data.message;
+                    messageBox.style.display = 'block';
+                    // Optionally, you can hide the message box after a few seconds
+                    setTimeout(() => {
+                        messageBox.style.display = 'none';
+                    }, 3000); // 3000 milliseconds = 3 seconds
+
+                }  else {
+                        // Show error message in message box
+                        const messageBox = document.getElementById('message-box');
+                        messageBox.textContent = data.message;
+                        messageBox.style.backgroundColor = 'red'; // Optionally, change background color for error messages
+                        messageBox.style.display = 'block';
+        
+                        // Optionally, you can hide the message box after a few seconds
+                        setTimeout(() => {
+                            messageBox.style.display = 'none';
+                        }, 3000); // 3000 milliseconds = 3 seconds
+                    }
+            } catch (error) {
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
+
+<%- include("partials/footer.ejs") %>
+
+</body>
+</html>

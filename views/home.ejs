@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/home.css">
+    <title>LetsScale</title>
+    
+    <%- include("partials/header.ejs") %>
+
+<body class="home-body">
+    
+    <div class="slideshow-container">
+        <div class="mySlides">
+            <img class="ig" src="/images/p7.jpg" alt="Slide 1">
+        </div>
+        <div class="mySlides">
+            <img class="ig" src="/images/s1.jpg" alt="Slide 1">
+        </div>
+        <div class="mySlides">
+            <img class="ig" src="/images/s2.jpg" alt="Slide 1">
+        </div>
+        <div class="mySlides ">
+            <img class="ig" src="/images/p5.jpg" alt="Slide 2">
+        </div>
+        <div class="mySlides ">
+            <img class="ig" src="/images/p4.jpg" alt="Slide 5">
+        </div>
+        <div class="mySlides ">
+            <img class="ig" src="/images/p6.jpg" alt="Slide 3">
+        </div>
+        <div class="mySlides ">
+            <img class="ig" src="/images/p9.jpg" alt="Slide 9">
+        </div>
+        <div class="mySlides ">
+            <img class="ig" src="/images/p3.jpg" alt="Slide 6">
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            
+<div class="zigzag-background">
+    <div class="welcoming">
+    <h1>Welcome to letsScale!</h1>
+    <p>Learn in a fun and engaging way. Explore our diverse range of courses and unleash your potential.</p>
+    </div>
+</div>
+            <!-- Video Upload Section -->
+            <div class="video-upload">
+                <h2>Share Your Learning Journey</h2>
+                <p>Join our community of learners and showcase your expertise by uploading videos to your profile. Help others benefit from your knowledge and inspire them on their learning journey!</p>
+                <a href="/courses/course" class="profile-link">Discover Our Courses Now!</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000); 
+        }
+        document.addEventListener("DOMContentLoaded", showSlides);
+    </script>
+
+<%- include("partials/footer.ejs") %>
+</body>
+</html>

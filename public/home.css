@@ -1,0 +1,59 @@
+
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+}
+
+.mySlides {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.zigzag-background {
+    background: 
+    linear-gradient(135deg, transparent 15px, black 0) 0 0,
+    linear-gradient(225deg, transparent 15px, black 0) 0 100%;;
+    background-size: 30px 30px; 
+    border-radius: 40px;
+    }
+
+.welcoming {
+    padding: 20px;
+    color: rgb(16, 227, 55);
+}
+.main-content {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold; 
+    position: absolute;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.video-upload {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.ig {
+    max-width: 100%;
+    height: auto;
+}
+
+.profile-link {
+    color: rgb(16, 227, 55);
+    background-color: #0d431c;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.profile-link:hover{
+    background-color: green;
+}

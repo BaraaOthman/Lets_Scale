@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/course.css">
+    <title>Enrolled Courses</title>
+
+    <%- include("partials/header.ejs") %>
+
+<body>
+    <div class="container">
+        <% if (enrollments && enrollments.length > 0) { %>
+            <h1 class="heading">Enrolled Courses</h1>
+            <ul class="course-list">
+                <% enrollments.forEach(enrollment => { %>
+                    <li class="course-item"  >
+                        <a href="/videos/video/<%= enrollment.course_id %>" style="text-decoration: none; outline: none;">
+                            <div style="background-image: url('/uploads/<%= enrollment.image %>'); background-size: cover; height: 200px;"
+                                class="course-details"  >
+                                <h2><%= enrollment.name %></h2>
+                                <p>Description: <%= enrollment.description %></p>
+                                <form id="enrollment-form" action="/courses/withdraw" method="POST"
+                                        class="enroll-form">
+                                        <input type="hidden" name="course_id" value="<%= enrollment.course_id %>">
+                                        <button type="submit" class="enroll-button">Withdraw</button>
+                                    </form>
+                            </div>
+                        </a>
+                    </li>
+                <%  } ); %>
+            </ul>
+        <% } else { %>
+            <h3 class="no-courses">
+                No enrollments available.<br>
+                You can add your course now!<br>
+                By clicking "Add Course" in the menu.
+            </h3>
+        <% } %>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <%- include("partials/footer.ejs") %>
+</body>
+
+</html>

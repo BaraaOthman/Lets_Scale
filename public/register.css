@@ -1,0 +1,28 @@
+.register-cont {
+    border: 2px solid rgb(27, 209, 21);
+    padding: 20px; 
+    margin: 10% auto; 
+    width: 30%; 
+    background-color: rgb(253, 253, 250);
+    border-radius: 15px; 
+    background-image: url("images/login2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.register-body {
+    background-image: url("images/r2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.center{
+    text-align: center;
+}
+
+.reg-log{
+    margin-bottom: 14px;
+}
+
